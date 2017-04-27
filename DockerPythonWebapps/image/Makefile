@@ -12,16 +12,16 @@ help:
 	@echo ""
 
 build:
-	@docker build --tag=minaki/webapps-flask .
+	@docker build --tag=my/webapps-flask .
 
 pull:
 	@docker pull python:3.4 
 
 clean:
-	@docker rmi -f minaki/webapps-flask
+	@docker rmi -f my/webapps-flask
 
 run:
-	@docker run -it -v `pwd`/../apps:/root/apps --name mywebapps -p 5000:5000 minaki/webapps-flask /bin/bash
+	@docker run -it -v `pwd`/../apps:/root/apps --name mywebapps -p 5000:5000 my/webapps-flask /bin/bash
 
 rm:
 	@docker stop mywebapps && docker rm mywebapps
