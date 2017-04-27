@@ -46,6 +46,17 @@ docker pull python:3.4
 docker images
 ```
 
+## ディレクトリの構成
+```
+DockerPythonWebapps
+├── README.md
+├── apps
+│   └── hello-flask.py
+└── image
+    ├── Dockerfile
+    └── Makefile
+```
+
 ## Docker Imageを作る方法
 自分でDocker Imageを作るには、2つ方法がある。
 * Docker Commit  
@@ -54,8 +65,7 @@ docker images
 環境構築コマンドを記したDockerfileを書き、Docker BuildしてImageを作成する。  
 
 ## Dockerfileを書いてみる
-
-以下のソースをDockerfileとしてImageディレクトリ配下に保存する。  
+以下のソースがDockerfileとしてimageディレクトリ配下にある。  
 ```
 From python:3.4 
 
@@ -63,12 +73,11 @@ USER root
 RUN apt-get update && apt-get install -y vim
 RUN pip install --upgrade pip
 RUN pip install flask && pip install flask --upgrade
-RUN pip install plotly && pip install plotly --upgrade
 RUN cd && mkdir apps
 ```
 
 ## Docker ImageをBuildする
-Imageディレクトリ内で次のコマンドを実行する。  
+imageディレクトリ内で次のコマンドを実行する。  
 --tagでImageに名前をつけることができる。  
 ```
 docker build --tag=my/webapps-flask .
@@ -87,9 +96,9 @@ Dockerコンテナ上からappsディレクトリ以下にアクセスするた�
 ```
 chmod +rx apps/
 ```
-apps以下に配置された、flask-test.pyを実行する。  
+apps以下に配置された、hello-flask.pyを実行する。  
 ```
-python3 flask-test.py
+python3 hello-flask.py
 ```
 
 ## ブラウザから動作確認する
@@ -129,8 +138,14 @@ Pin to dashboardにチェックを入れ、createをクリック。
 デプロイの設定をクリック  
 ![DeploymentOptions](img/imageDeploymentOptions.png)  
 ChooseSourceをクリック  
+デプロイ環境はなんでもよい。  
 ![ChooseSource](img/imageChooseSource.png)  
-
+ApplicationSettingをクリック  
+Python versionを3.4に設定する。  
+![ApplicatioinSetting](img/imageApplicationSetting.png)  
+下にスクロールすると、VirtualApplications and directortyと書いてある。  
+POSTやGETをする場合はここを設定する。  
+![VirtualApplications](img/imageVirtualapplications.png)  
 
 # 参考資料
 
